@@ -22,6 +22,14 @@ Is belief in the bigbang theory (BIGBANG) independent of belief in an afterlife 
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
+```{r}
+GSS$POSTLIFE = as.factor(GSS$POSTLIFE)
+GSS$BIGBANG = as.factor(GSS$BIGBANG)
+```
+
+I will the cat~cat helper file since both variables are categorical.
+
+
 # Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -32,13 +40,40 @@ Is belief in the bigbang theory (BIGBANG) independent of belief in an afterlife 
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
 
+```{r}
+dd2 <- GSS %>% group_by(POSTLIFE,BIGBANG) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=POSTLIFE,y=count,fill=BIGBANG))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=POSTLIFE,y=prcnt*100,fill=BIGBANG)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+This graph shows that the percent plot shows that most that don't beleive in POSTLIFE do believe in the Big Bang Theory. It also shows that if they believe in POSTLIFE they do not believe in the Big Bang Theory by a smallere margin.
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+
+```{r}
+table1 <- xtabs(~POSTLIFE + BIGBANG, data=GSS)
+rowPerc(table1)
+colPerc(table1)
+```
+
+This chart shows that those who do believe in postlife don't believe in the Big Bang Theory at 57% compared to those who believe in postlife and the Big Bang Theory at 42%. 
+
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
 
 
 # Discussion and Conclusion

@@ -74,8 +74,18 @@ This chart shows that those who do believe in postlife don't believe in the Big 
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
 
+The p-value is 0.08006 which is a large number therefore we reject the null hypothesis.
+
+The odds ratio is 0.4081275 which means that there is a low chance that belief in postlife and the Big Bang Theory are related.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+Based on the data provided we reject the null hypothesis and by using the odds ratio we infer that there is a low chance that the belief in a postife and the belief in the Big Bang theory are related.
